@@ -4,7 +4,7 @@ import PokemonDetail from "./PokemonDetail";
 import { Pokemon, usePokemons } from "../hooks/usePokemons";
 import { themeStyles } from "../styles/styles";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Function to extract Pokémon ID from URL. example: 'https://pokeapi.co/api/v2/pokemon/28/'
 function getPokemonIdFromUrl(url: string) {
@@ -12,11 +12,17 @@ function getPokemonIdFromUrl(url: string) {
   return parts[parts.length - 2];
 }
 
+//TODO: Store state in url! filter, sort, amount, pokemon detail id
+
+
 export function PokemonsOverview() {
   console.log("render");
   const navigate = useNavigate();
   const { isDarkTheme } = React.useContext(ThemeContext);
-  const [selectedPokemonId, setSelectedPokemonId] = React.useState<string>();
+  // const [selectedPokemonId, setSelectedPokemonId] = React.useState<string>();
+  const { pokemonId } = useParams();
+  const selectedPokemonId = pokemonId;
+
   const [textFilter, setTextFilter] = React.useState("");
   const [sort, setSort] = React.useState<"name_up" | "name_down">("name_up");
   const [pokemonLimit, setPokemonLimit] = React.useState<number>(20);
@@ -49,8 +55,8 @@ export function PokemonsOverview() {
 
   function handlePokemonClick(pokemon: Pokemon): void {
     const pokemonId = getPokemonIdFromUrl(pokemon.url);
-    setSelectedPokemonId(pokemonId);
-    // navigate(`/${pokemonId}`)
+    // setSelectedPokemonId(pokemonId);
+    navigate(`/pokemons/${pokemonId}`)
   }
 
   const handleSortClick = () =>
@@ -128,7 +134,8 @@ export function PokemonsOverview() {
         </div>
 
         <div style={{ flex: 2, textAlign: "center" }}>
-          <PokemonDetail id={selectedPokemonId}></PokemonDetail>
+          <PokemonDetail></PokemonDetail>
+          {/* <PokemonDetail id={selectedPokemonId}></PokemonDetail> */}
         </div>
       </div>
     </div>

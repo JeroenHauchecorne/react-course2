@@ -2,14 +2,18 @@ import React from "react";
 import { usePokemon } from "../hooks/usePokemon";
 import { useParams } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { usePokemons } from "../hooks/usePokemons";
 
-const PokemonDetail = (props: { id?: string }) => {
+type Props = {
+  id?: string
+}
+
+
+const PokemonDetail = (props: Props) => {
   const { isDarkTheme } = React.useContext(ThemeContext);
   const { pokemonId } = useParams();
-  const { pokemon } = usePokemon(pokemonId ?? props.id);
+  const { pokemon } = usePokemon(pokemonId);
 
-  if (!pokemon) return <div>Click on a pokemon to see its details</div>;
+  if (!pokemonId || !pokemon) return <div>Click on a pokemon to see its details</div>;
 
   return (
     <div>

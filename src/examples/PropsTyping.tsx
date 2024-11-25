@@ -11,5 +11,5 @@ function MyButton(props: MyButtonProps) {
 // }
 
 export const PropsTyping = () => {
-  return <MyButton title={5}></MyButton>;
+  return <MyButton title={"5"}></MyButton>;
 };

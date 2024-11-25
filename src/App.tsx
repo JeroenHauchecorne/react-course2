@@ -1,5 +1,4 @@
 import "./App.css";
-import { Dropdown } from "./exercices/dropdown/Dropdown";
 import { Exercice as ImmutableExercice } from "./examples/Immutable";
 import { PokemonsOverview } from "./pokemon/views/PokemonsOverview";
 import { Excercice as DropdownExercice } from "./exercices/dropdown/Dropdown";
@@ -25,6 +24,7 @@ import PageNotFound from "./pokemon/views/PageNotFound";
 import { FetchData } from "./examples/FetchData";
 import { NavBar } from "./pokemon/NavBar";
 import { ThemeProvider } from "./pokemon/contexts/ThemeContext";
+import { PokemonApp } from "./pokemon/PokemonApp";
 
 function App() {
   console.log("render");
@@ -54,14 +54,7 @@ function App() {
 
       {/* <FetchData /> */}
 
-      {/* <ThemeProvider>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<PokemonsOverview />} />
-          <Route path="/:pokemonId" element={<PokemonDetail />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </ThemeProvider> */}
+      <PokemonApp />
     </>
   );
 }
