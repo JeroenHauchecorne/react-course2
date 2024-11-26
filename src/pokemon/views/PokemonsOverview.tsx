@@ -4,7 +4,7 @@ import PokemonDetail from "./PokemonDetail";
 import { Pokemon, usePokemons } from "../hooks/usePokemons";
 import { themeStyles } from "../styles/styles";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 // Function to extract Pokémon ID from URL. example: 'https://pokeapi.co/api/v2/pokemon/28/'
 function getPokemonIdFromUrl(url: string) {
@@ -135,6 +135,7 @@ export function PokemonsOverview() {
 
         <div style={{ flex: 2, textAlign: "center" }}>
           <PokemonDetail></PokemonDetail>
+          {/* <Outlet /> */}
           {/* <PokemonDetail id={selectedPokemonId}></PokemonDetail> */}
         </div>
       </div>
