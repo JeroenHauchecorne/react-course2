@@ -8,6 +8,7 @@ import { ComponentA } from "./examples/SimplestComponent";
 import { State } from "./examples/State";
 import { LiftedState } from "./examples/LiftedState";
 import { TodoList } from "./exercices/TodoList";
+import { List as ListExercice } from "./exercices/list/List";
 import { DontNestComponents } from "./examples/DontNestComponents";
 import { Memoization } from "./examples/Memoization";
 import Impure from "./examples/Impure";
@@ -25,12 +26,14 @@ import { FetchData } from "./examples/FetchData";
 import { NavBar } from "./pokemon/NavBar";
 import { ThemeProvider } from "./pokemon/contexts/ThemeContext";
 import { PokemonApp } from "./pokemon/PokemonApp";
+import { LazyLoading } from "./examples/lazy/LazyLoading";
 
 function App() {
   console.log("render");
 
   return (
     <>
+      <ListExercice />
       {/* <ImmutableExercice /> */}
       {/* <DropdownExercice></DropdownExercice> */}
       {/* <Lists></Lists> */}
@@ -54,7 +57,9 @@ function App() {
 
       {/* <FetchData /> */}
 
-      <PokemonApp />
+      {/* <LazyLoading /> */}
+
+      {/* <PokemonApp /> */}
     </>
   );
 }
