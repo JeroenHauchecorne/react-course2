@@ -22,16 +22,16 @@ export const Memoization = () => {
   //   console.log("click on childComponent");
   // };
 
-  const handleClick = React.useCallback(() => {
-    //..
-    console.log("click on childComponent");
-  }, []);
+  // const handleClick = React.useCallback(() => {
+  //   //..
+  //   console.log("click on childComponent");
+  // }, []);
 
   // const newArray = array.map((x) => x * 2);
 
-  const newArray = React.useMemo(() => {
-    return array.map((x) => x * 2);
-  }, [array]);
+  // const newArray = React.useMemo(() => {
+  //   return array.map((x) => x * 2);
+  // }, [array]);
 
   return (
     <div>
@@ -42,8 +42,8 @@ export const Memoization = () => {
       <br></br>
       <ChildMemo
         name="Child Component"
-        onClickName={handleClick}
-        array={newArray}
+        // onClickName={handleClick}
+        // array={newArray}
       />
     </div>
   );

@@ -1,7 +1,9 @@
+import React from "react";
 import { useState, useRef } from "react";
 
 export const Ref = () => {
   return <Stopwatch />;
+  // return <FocusInput />;
 };
 
 function Stopwatch() {
@@ -29,7 +31,7 @@ function Stopwatch() {
 
   let secondsPassed = 0;
   if (startTime != undefined && now != undefined) {
-    secondsPassed = (now - startTime) / 1000;
+    secondsPassed = (now - startTime) / 1000;  // secondsPassed is a derived value from 2 states
   }
 
   return (
@@ -38,5 +40,22 @@ function Stopwatch() {
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
     </>
+  );
+}
+
+function FocusInput() {
+  const inputRef = React.useRef(null);
+  const [show, setShow] = React.useState(false);
+
+  const handleFocus = () => {
+      inputRef.current.focus();
+  };
+
+  return (
+    <div>
+      <h2>Focus Input Example</h2>
+      {show && <input ref={inputRef} type="text" placeholder="Type something..." />}
+      <button onClick={handleFocus}>Focus Input</button>
+    </div>
   );
 }

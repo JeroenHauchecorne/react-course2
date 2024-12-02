@@ -29,18 +29,18 @@ import { PokemonApp } from "./pokemon/PokemonApp";
 import { LazyLoading } from "./examples/lazy/LazyLoading";
 
 function App() {
-  console.log("render");
+  // console.log("render");
 
   return (
     <>
-      <ListExercice />
+      {/* <ListExercice /> */}
       {/* <ImmutableExercice /> */}
       {/* <DropdownExercice></DropdownExercice> */}
       {/* <Lists></Lists> */}
       {/* <Events></Events> */}
       {/* <State></State> */}
       {/* <LiftedState></LiftedState> */}
-      {/* <ComponentA></C omponentA> */}
+      {/* <ComponentA></ComponentA> */}
       {/* <TodoList></TodoList> */}
       {/* <DontNestComponents /> */}
       {/* <Impure /> */}
@@ -59,7 +59,7 @@ function App() {
 
       {/* <LazyLoading /> */}
 
-      {/* <PokemonApp /> */}
+      <PokemonApp />
     </>
   );
 }

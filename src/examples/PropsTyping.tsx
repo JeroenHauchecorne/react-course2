@@ -1,9 +1,18 @@
 type MyButtonProps = {
   title: string;
+  aFunction: () => void;
+  renderComponent?: () => JSX.Element;
+  component?: JSX.Element;
 };
 
 function MyButton(props: MyButtonProps) {
-  return <button>{props.title}</button>;
+  return (
+    <div>
+      <button>{props.title}</button>;
+      {props.renderComponent && props.renderComponent()}
+      {props.component}
+    </div>
+  );
 }
 
 // function MyButton({ title }: { title: string }) {
@@ -11,5 +20,12 @@ function MyButton(props: MyButtonProps) {
 // }
 
 export const PropsTyping = () => {
-  return <MyButton title={"5"}></MyButton>;
+  return (
+    <MyButton
+      title={"5"}
+      aFunction={() => console.log("hello world")}
+      renderComponent={() => <div>hello world</div>}
+      component={<div>hello world!! </div>}
+    ></MyButton>
+  );
 };

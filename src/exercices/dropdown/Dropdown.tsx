@@ -73,7 +73,14 @@ const PokemonDropdown = () => {
         </div>
       )}
       renderSelectedItem={(item) => (
-        <span style={{ textTransform: "uppercase" }}>{item.pokemonName}</span>
+        <div>
+          <img
+            height={50}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
+            alt={item.pokemonName}
+          />
+          <span style={{ textTransform: "uppercase" }}>{item.pokemonName}</span>
+        </div>
       )}
     />
   );
