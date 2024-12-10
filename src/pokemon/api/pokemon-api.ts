@@ -1,3 +1,7 @@
+function delay(ms) {
+  return new Promise(res => setTimeout(res, ms))
+}
+
 type PokemonListApiResponse = {
   count: number;
   next: string | null;
@@ -12,6 +16,8 @@ export async function fetchPokemons(fetchLimit: number): Promise<PokemonListApiR
   const limit = fetchLimit;
   const url = `https://pokeapi.co/api/v2/pokemon/?limit=${limit}`;
 
+  await delay(2000);
+
   return fetch(url)
     .then((response) => response.json())
     .catch((error) => {
@@ -20,9 +26,12 @@ export async function fetchPokemons(fetchLimit: number): Promise<PokemonListApiR
 }
 
 export async function fetchPokemon(
-  pokemonId: string
+  pokemonId?: string
 ): Promise<PokemonApiResponse> {
   console.log(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+
+  await delay(2000);
+
   return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
     .then((response) => response.json())
     .catch((error) => {

@@ -25,8 +25,11 @@ import PageNotFound from "./pokemon/views/PageNotFound";
 import { FetchData } from "./examples/FetchData";
 import { NavBar } from "./pokemon/NavBar";
 import { ThemeProvider } from "./pokemon/contexts/ThemeContext";
-import { PokemonApp } from "./pokemon/PokemonApp";
 import { LazyLoading } from "./examples/lazy/LazyLoading";
+import { PokemonApp } from "./pokemon/PokemonApp";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   // console.log("render");
@@ -59,7 +62,9 @@ function App() {
 
       {/* <LazyLoading /> */}
 
-      <PokemonApp />
+      <QueryClientProvider client={queryClient}>
+        <PokemonApp />
+      </QueryClientProvider>
     </>
   );
 }

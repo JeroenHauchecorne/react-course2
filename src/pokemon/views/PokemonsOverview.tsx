@@ -13,7 +13,7 @@ function getPokemonIdFromUrl(url: string) {
 }
 
 //TODO: Store state in url! filter, sort, amount, pokemon detail id
-
+//TODO: skeleton view when isPending
 
 export function PokemonsOverview() {
   console.log("render");
@@ -26,7 +26,8 @@ export function PokemonsOverview() {
   const [textFilter, setTextFilter] = React.useState("");
   const [sort, setSort] = React.useState<"name_up" | "name_down">("name_up");
   const [pokemonLimit, setPokemonLimit] = React.useState<number>(20);
-  const { pokemons } = usePokemons(pokemonLimit);
+  // const { pokemons } = usePokemons(pokemonLimit);
+  const { pokemons, isPending } = usePokemons(pokemonLimit); //react-query
 
   const textFilterIsEmpty = textFilter.length <= 0;
   const filteredPokemons = textFilterIsEmpty
@@ -56,7 +57,7 @@ export function PokemonsOverview() {
   function handlePokemonClick(pokemon: Pokemon): void {
     const pokemonId = getPokemonIdFromUrl(pokemon.url);
     // setSelectedPokemonId(pokemonId);
-    navigate(`/pokemons/${pokemonId}`)
+    navigate(`/pokemons/${pokemonId}`);
   }
 
   const handleSortClick = () =>
@@ -65,6 +66,43 @@ export function PokemonsOverview() {
   const handleLimitChange = (event) => {
     setPokemonLimit(event.target.value);
   };
+
+  const renderPokemonList = (
+    <ul
+      style={{
+        display: "flex",
+        gap: "5px",
+        flexDirection: "column",
+      }}
+    >
+      {sortedAndFilteredPokemons.map((pokemon) => (
+        <li
+          key={pokemon.name}
+          onClick={() => handlePokemonClick(pokemon)}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: isDarkTheme ? "#302d29" : "#f6f0ea",
+            border:
+              getPokemonIdFromUrl(pokemon.url) === selectedPokemonId
+                ? "solid 2px #ba6b6b"
+                : "none",
+          }}
+        >
+          <span>{getPokemonIdFromUrl(pokemon.url)}.</span>
+          <img
+            width={60}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonIdFromUrl(
+              pokemon.url
+            )}.png`}
+            alt={pokemon.name}
+          />
+          <span> {pokemon.name}</span>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <div style={{ ...themeStyles(isDarkTheme), padding: "2rem" }}>
@@ -96,46 +134,11 @@ export function PokemonsOverview() {
       </div>
 
       <div style={{ display: "flex" }}>
-        <div style={{ flex: 1 }}>
-          <ul
-            style={{
-              display: "flex",
-              gap: "5px",
-              flexDirection: "column",
-            }}
-          >
-            {sortedAndFilteredPokemons.map((pokemon) => (
-              <li
-                key={pokemon.name}
-                onClick={() => handlePokemonClick(pokemon)}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: isDarkTheme ? "#302d29" : "#f6f0ea",
-                  border:
-                    getPokemonIdFromUrl(pokemon.url) === selectedPokemonId
-                      ? "solid 2px #ba6b6b"
-                      : "none",
-                }}
-              >
-                <span>{getPokemonIdFromUrl(pokemon.url)}.</span>
-                <img
-                  width={60}
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonIdFromUrl(
-                    pokemon.url
-                  )}.png`}
-                  alt={pokemon.name}
-                />
-                <span> {pokemon.name}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div style={{ flex: 1 }}>{renderPokemonList}</div>
 
         <div style={{ flex: 2, textAlign: "center" }}>
-          <PokemonDetail></PokemonDetail>
-          {/* <Outlet /> */}
+          {/* <PokemonDetail></PokemonDetail> */}
+          <Outlet />
           {/* <PokemonDetail id={selectedPokemonId}></PokemonDetail> */}
         </div>
       </div>
