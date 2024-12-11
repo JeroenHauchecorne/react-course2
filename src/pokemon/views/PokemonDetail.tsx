@@ -7,19 +7,18 @@ type Props = {
   id?: string
 }
 
-
 const PokemonDetail = (props: Props) => {
   const { isDarkTheme } = React.useContext(ThemeContext);
   const { pokemonId } = useParams();
   const { pokemon } = usePokemon(pokemonId);
 
-  if (!pokemonId || !pokemon) return <div>Click on a pokemon to see its details</div>;
+  if (!pokemonId || !pokemon) return <></>;
 
   return (
     <div>
       <h2>{pokemon.name}</h2>
       {pokemon.spriteUrls.map((x) => (
-        <img src={x} alt={pokemon.name} />
+        <img key={x} src={x} alt={pokemon.name} />
       ))}
       <div>
         <label>ID:</label>
