@@ -14,40 +14,43 @@ export type Pokemon = {
   url: string;
 };
 
-// export const usePokemons = (fetchLimit: number) => {
-//   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-
-//   React.useEffect(() => {
-//     fetchPokemons(fetchLimit).then((data) => {
-//       console.log(data);
-//       setPokemons(
-//         data.results.map((x) => {
-//           return {
-//             id: getPokemonIdFromUrl(x.url),
-//             ...x,
-//           };
-//         })
-//       );
-//     });
-//   }, [fetchLimit]);
-
-//   return { pokemons };
-// };
-
 export const usePokemons = (fetchLimit: number) => {
-  const query = useQuery({
-    queryKey: ["pokemons", fetchLimit],
-    queryFn: () => fetchPokemons(fetchLimit),
-    select: (data) => ({
-      ...data,
-      results: data.results.map((x) => {
-        return {
-          id: getPokemonIdFromUrl(x.url),
-          ...x,
-        };
-      }),
-    }),
-  });
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
-  return { pokemons: query.data?.results || [], ...query };
+  React.useEffect(() => {
+    fetchPokemons(fetchLimit).then((data) => {
+      console.log(data);
+      setPokemons(
+        data.results.map((x) => {
+          return {
+            id: getPokemonIdFromUrl(x.url),
+            ...x,
+          };
+        })
+      );
+    });
+  }, [fetchLimit]);
+
+  return { pokemons };
 };
+
+/**
+ * REACT-QUERY: https://tanstack.com/query/latest/docs/framework/react/overview
+ */
+// export const usePokemons = (fetchLimit: number) => {
+//   const query = useQuery({
+//     queryKey: ["pokemons", fetchLimit],
+//     queryFn: () => fetchPokemons(fetchLimit),
+//     select: (data) => ({
+//       ...data,
+//       results: data.results.map((x) => {
+//         return {
+//           id: getPokemonIdFromUrl(x.url),
+//           ...x,
+//         };
+//       }),
+//     }),
+//   });
+
+//   return { pokemons: query.data?.results || [], ...query };
+// };

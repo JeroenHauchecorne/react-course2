@@ -9,6 +9,11 @@ type Props = {
 
 const PokemonDetail = (props: Props) => {
   const { isDarkTheme } = React.useContext(ThemeContext);
+
+  // pokemon ID is passed in as a prop
+  // const pokemonId = props.id
+
+  // read pokemonID from URL
   const { pokemonId } = useParams();
   const { pokemon } = usePokemon(pokemonId);
 

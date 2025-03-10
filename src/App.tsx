@@ -62,9 +62,12 @@ function App() {
 
       {/* <LazyLoading /> */}
 
-      <QueryClientProvider client={queryClient}>
+      <PokemonApp />
+
+      {/*With React-Query */}
+      {/* <QueryClientProvider client={queryClient}>
         <PokemonApp />
-      </QueryClientProvider>
+      </QueryClientProvider> */}
     </>
   );
 }

@@ -8,13 +8,16 @@ import { Outlet, useParams } from "react-router-dom";
 import { PokemonList } from "./PokemonList";
 
 
-//TODO: Store state in url! filter, sort, amount, pokemon detail id
+//TODO: Store state in url: filter, sort, amount
 //TODO: skeleton view when isPending
 
 export function PokemonsOverview() {
-  console.log("render");
   const { isDarkTheme } = React.useContext(ThemeContext);
+
+  // store selected pokemonID 
   // const [selectedPokemonId, setSelectedPokemonId] = React.useState<string>();
+
+  // URL holds state for selected pokemonID (preferred)
   const { pokemonId } = useParams();
   const selectedPokemonId = pokemonId;
 
@@ -92,7 +95,10 @@ export function PokemonsOverview() {
 
         <div style={{ flex: 2, textAlign: "center" }}>
           {selectedPokemonId ? <PokemonDetail></PokemonDetail>: <div>Click on a pokemon to see its details</div>}
+          
+         
           {/* <Outlet /> */}
+          
           {/* <PokemonDetail id={selectedPokemonId}></PokemonDetail> */}
         </div>
       </div>
